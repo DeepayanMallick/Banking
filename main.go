@@ -2,13 +2,18 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
-func main()  {
-	http.HandleFunc("/greet", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "hello world")
-	})
+func main() {
+	// define route
+	http.HandleFunc("/greet", greet)
 
-	http.ListenAndServe("localhost:8000", nil)
+	// starting server
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+}
+
+func greet(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hello world")
 }
